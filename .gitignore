@@ -2,6 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/JustDo/JustDo/bin/Debug/netcoreapp2.1
-/JustDo/.vs
-/JustDo/JustDo/node_modules
+/bin/Debug/netcoreapp2.1
+/.vs
+/JustDo/node_modules
