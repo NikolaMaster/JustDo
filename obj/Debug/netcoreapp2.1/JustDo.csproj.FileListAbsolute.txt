@@ -26,3 +26,12 @@ C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\Jus
 C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.RazorTargetAssemblyInfo.cache
 C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.dll
 C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.pdb
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\bin\Debug\netcoreapp2.1\JustDo.Views.dll
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\bin\Debug\netcoreapp2.1\JustDo.Views.pdb
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.TagHelpers.input.cache
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.TagHelpers.output.cache
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.RazorCoreGenerate.cache
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.RazorTargetAssemblyInfo.cs
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.Views.pdb
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\JustDo.csproj.CopyComplete
+C:\Users\nikita.kholodilov\Documents\Projects\JustDo\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs

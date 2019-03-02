@@ -1,0 +1,26 @@
+{
+  "name": "justdo",
+  "description": "A React.js client for 'To Do list' application 'JustDo'",
+  "version": "1.0.0",
+  "author": "Nikita Kholodilov",
+  "dependencies": {
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-router-dom": "4.3.1",
+    "immutable": "3.8.2",
+    "react-redux": "6.0.1",
+    "redux": "4.0.1",
+    "isomorphic-fetch": "2.2.1",
+    "redux-thunk": "2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.3.4",
+    "@babel/preset-env": "7.3.4",
+    "@babel/preset-react": "7.0.0",
+    "aspnet-webpack": "^3.0.0",
+    "babel-loader": "8.0.5",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.2.3",
+    "webpack-dev-middleware": "^3.6.0"
+  }
+}

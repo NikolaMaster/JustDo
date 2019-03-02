@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using JustDo.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Task = System.Threading.Tasks.Task;
 
 namespace JustDo.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : Controller
     {
         private readonly JustDoContext _db;
 
@@ -23,18 +21,12 @@ namespace JustDo.Controllers
             _db = db;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(_db.Users.ToList());
-        }
-
         [HttpPost("/SignUp")]
         public IActionResult SignUp(SignUpModel model)
         {
             if (!ModelState.IsValid)
             {
-                return StatusCode(404);
+                return StatusCode(400);
             }
 
             var user = new User
@@ -49,9 +41,15 @@ namespace JustDo.Controllers
         }
 
         [HttpPost("/SingIn")]
-        public async Task SignIn(User user)
+        public async Task SignIn([FromBody] SignInModel user)
         {
-            var identity = GetIdentity(user.Login, user.Password);
+            if (!ModelState.IsValid)
+            {
+                Response.StatusCode = 400;
+                return;
+            }
+
+            var identity = GetIdentity(user.UserName, user.Password);
             if (identity == null)
             {
                 Response.StatusCode = 400;
