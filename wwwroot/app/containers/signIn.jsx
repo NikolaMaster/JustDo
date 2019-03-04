@@ -41,10 +41,7 @@ class SignInContainer extends React.Component {
 
 let mapDispatch = (dispatch) => {
     return {
-        signIn: (credentials) => dispatch(actions.signIn({
-            UserName: credentials.username,
-            Password: credentials.password
-        }))
+        signIn: (credentials) => dispatch(actions.signIn(credentials))
     };
 };
 

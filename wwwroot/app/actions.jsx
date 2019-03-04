@@ -38,10 +38,10 @@ function sendRequest(method, url, data) {
         xhr.open(method, url, true);
         const token = sessionStorage.getItem(tokenKey);
         if (token) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
         }
 
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function() {
             if (xhr.readyState !== 4) {
                 return;

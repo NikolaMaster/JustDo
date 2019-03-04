@@ -53,8 +53,9 @@ namespace JustDo
                 app.UseHsts();
             }
 
-            app.UseFileServer();
             app.UseHttpsRedirection();
+            app.UseFileServer();
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc(routes =>
             {

@@ -40,8 +40,8 @@ namespace JustDo.Controllers
             return Ok(user);
         }
 
-        [HttpPost("/SingIn")]
-        public async Task SignIn([FromBody] SignInModel user)
+        [HttpPost("/token")]
+        public async Task Token([FromBody] SignInModel user)
         {
             if (!ModelState.IsValid)
             {
