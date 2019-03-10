@@ -11,10 +11,10 @@ namespace JustDo.ViewModels
 
         [Required]
         [MinLength(8)]
-        [NonWhiteSpace]
-        [MinCapitalLetters]
-        [AtLeastOneDigit]
-        [AtLeastOneSpecialCharacter]
+        [NonWhiteSpace(ErrorMessage = @"Password can't contain whitespace")]
+        [MinCapitalLetters(ErrorMessage = @"Password must contain capital letters")]
+        [AtLeastOneDigit(ErrorMessage = @"Password must contain at least one digit")]
+        [AtLeastOneSpecialCharacter(ErrorMessage = @"Password must contain at least one special character")]
         public string Password { get; set; }
     }
 }

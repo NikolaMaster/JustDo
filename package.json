@@ -3,24 +3,32 @@
   "description": "A React.js client for 'To Do list' application 'JustDo'",
   "version": "1.0.0",
   "author": "Nikita Kholodilov",
+  "scripts": {
+    "start": "webpack -d"
+  },
   "dependencies": {
+    "@material-ui/core": "3.9.2",
+    "history": "4.7.2",
+    "immutable": "3.8.2",
+    "isomorphic-fetch": "2.2.1",
     "react": "16.8.3",
     "react-dom": "16.8.3",
-    "react-router-dom": "4.3.1",
-    "immutable": "3.8.2",
     "react-redux": "6.0.1",
+    "react-router-dom": "4.3.1",
     "redux": "4.0.1",
-    "isomorphic-fetch": "2.2.1",
     "redux-thunk": "2.3.0"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
     "@babel/preset-env": "7.3.4",
     "@babel/preset-react": "7.0.0",
-    "aspnet-webpack": "^3.0.0",
+    "aspnet-webpack": "3.0.0",
     "babel-loader": "8.0.5",
     "webpack": "4.29.6",
     "webpack-cli": "3.2.3",
-    "webpack-dev-middleware": "^3.6.0"
+    "webpack-dev-middleware": "3.6.0",
+    "css-loader": "0.28.11",
+    "file-loader": "1.1.11",
+    "style-loader": "0.19.1"
   }
 }

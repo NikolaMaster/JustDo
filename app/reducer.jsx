@@ -1,25 +1,24 @@
 import { Map } from 'immutable';
+import { TokenKey } from './actions.jsx';
 
-export default function(state = Map(), action){
+export default function (state = Map({
+    isAuthorized: !!(localStorage.getItem(TokenKey))
+}), action){
     switch(action.type) {        
         case 'TOGGLE_LOADER': 
-            state.set('isLoading', !state.isLoading);
-            break;
+            return state.update('isLoading', (isLoading) => !isLoading);
         case 'SIGN_IN_SUCCESS':
-            state.merge({
-                username: action.username,
-                'sign-in-errors': undefined
+            return state.merge({
+                username: action.payload.username,
+                isAuthorized: true,
+                signInErrors: null
             });
-            break;
         case 'SIGN_IN_ERROR':
-            state.set('sign-in-errors', action.errors);
-            break;
+            return state.set('signInErrors', action.payload.errors);
         case 'SIGN_UP_SUCCESS':
-            state.delete('sign-up-errors');
-            break;
+            return state.delete('signUpErrors');
         case 'SIGN_UP_ERROR':
-            state.set('sign-up-errors', action.errors);
-            break;
+            return state.update('signUpErrors', () => action.errors);
     }
 
     return state;

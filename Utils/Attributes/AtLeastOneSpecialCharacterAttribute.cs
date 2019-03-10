@@ -6,7 +6,6 @@ namespace JustDo.Utils.Attributes
     {
         public AtLeastOneSpecialCharacterAttribute() : base(@"^.*[^A-Za-z0-9\s].*$")
         {
-            ErrorMessage = $"{ErrorMessageResourceName} must contain at least one special character";
         }
     }
 }

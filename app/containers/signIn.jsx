@@ -1,6 +1,7 @@
 import React from 'react';
 import actions from '../actions.jsx';
 import { connect } from 'react-redux';
+import { Fab, Grid, TextField, FormGroup } from '@material-ui/core';
 
 class SignInContainer extends React.Component {
     constructor(props) {
@@ -29,15 +30,34 @@ class SignInContainer extends React.Component {
         this.setState({ password: e.target.value });
     }
 
+    getUserNameError() {
+        return this.props.errors ? this.props.errors.UserName : null;
+    }
+
+    getPasswordError() {
+        return this.props.errors ? this.props.errors.Password : null;
+    }
+
     render() {
         return (
-            <div>
-                <input type="text" placeholder="username" onChange={this.onUsernameChange} />
-                <input type="password" placeholder="password" onChange={this.onPasswordChange} />
-                <button type="button" onClick={this.onClick}>Sign In</button>
-            </div>);
+            <Grid container direction="row" alignItems="center" justify="center">
+                <Grid item>
+                    <h1>Sign In</h1>
+                    <FormGroup>
+                        <TextField error={this.getUserNameError()} placeholder="E-mail" onChange={this.onUsernameChange} margin="dense"/>
+                        <TextField error={this.getPasswordError()} type="password" placeholder="Password" onChange={this.onPasswordChange} margin="normal" />                        
+                    </FormGroup>
+                    <Fab variant="extended" onClick={this.onClick}>Sign In</Fab>
+                </Grid>
+            </Grid>);
     }
 }
+
+let mapStateToProps = (state) => {
+    return {
+        errors: state.get('signInErrors')
+    };
+};
 
 let mapDispatch = (dispatch) => {
     return {
@@ -45,4 +65,4 @@ let mapDispatch = (dispatch) => {
     };
 };
 
-export default connect(null, mapDispatch)(SignInContainer);
+export default connect(mapStateToProps, mapDispatch)(SignInContainer);

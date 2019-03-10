@@ -6,7 +6,6 @@ namespace JustDo.Utils.Attributes
     {
         public NonWhiteSpaceAttribute() : base(@"^\S+$")
         {
-            ErrorMessage = $"{ErrorMessageResourceName} can't contain whitespace";
         }
     }
 }

@@ -6,7 +6,6 @@ namespace JustDo.Utils.Attributes
     {
         public AtLeastOneDigitAttribute() : base(@"^.*\d.*$")
         {
-            ErrorMessage = $"{ErrorMessageResourceName} must contain at least one digit";
         }
     }
 }

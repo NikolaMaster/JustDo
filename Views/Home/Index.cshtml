@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html style="height: 100%">
+<html>
 <head>
     <meta charset="utf-8" />
     <script type="text/javascript">
@@ -8,13 +8,15 @@
             signIn: '/token'
         }
     </script>
+    <style type="text/css">
+        html, body, #app {
+            height: 100%;
+        }
+    </style>
     <title>JustDo</title>
 </head>
-<body style="height:100%">
-    <div style="height:100%">
-        <div style="width: 50%; height: 100%; display:inline-block"></div>
-        <div id="app" style="vertical-align: top; display:inline-block"></div>
-    </div>
+<body>
+<div id="app"></div>
 <script src="@Url.Content("~/bundle/bundle.js")"></script>
 </body>
 </html>

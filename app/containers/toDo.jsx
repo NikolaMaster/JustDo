@@ -9,13 +9,13 @@ class ToDoContainer extends React.Component
     }
 
     render() {
-        return this.props.username ? <div>To Do List</div> : <Redirect to="/SignIn" />;
+        return this.props.isAuthorized ? <div>To Do List</div> : <Redirect to="/SignIn" />;
     }
 }
 
 let mapProps = (state) => {
     return {
-        username: state.username
+        isAuthorized: state.get('isAuthorized')
     };
 };
 

@@ -22,9 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
     <Folder Include="wwwroot\bundle\" />
-    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>

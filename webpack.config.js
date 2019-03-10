@@ -3,15 +3,14 @@
 var path = require('path');
 
 module.exports = {
-    entry: './app/app.jsx',
+    entry: {
+        main:  './app/app.jsx'
+    },
     devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, './wwwroot/bundle'),
         publicPath: '/bundle/',
         filename: 'bundle.js'
-    },
-    devServer:{
-        historyApiFallback: true
     },
     module: {
         rules: [
@@ -22,6 +21,10 @@ module.exports = {
                 options: {
                     presets: ['@babel/preset-env', '@babel/preset-react']
                 }
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             }
         ]
     }

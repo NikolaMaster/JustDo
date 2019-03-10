@@ -1,19 +1,23 @@
-const tokenKey = 'TokenKey';
+import history from './history.js';
+export const TokenKey = 'TokenKey';
 
 let signIn = function (credentials) {
     return dispatch => {
-        return sendRequest('POST', window.constants.signIn, credentials).then(response => {
-            return JSON.parse(response.data);
-        }).then(data => {
-            sessionStorage.setItem(tokenKey, data.access_token);
+        return sendRequest('POST', window.constants.signIn, credentials).then(data => {
+            localStorage.setItem(TokenKey, data.access_token);
             dispatch({
                 type: 'SIGN_IN_SUCCESS',
-                credentials
+                payload: {
+                    username: credentials.username
+                }
             });
+            history.push('/');
         }).catch(data => {
             dispatch({
                 type: 'SIGN_IN_ERROR',
-                errors: data
+                payload: {
+                    errors: data
+                }
             });
         });
     };
@@ -21,9 +25,7 @@ let signIn = function (credentials) {
 
 let signUp = function(usersData) {
     return dispatch => {
-        return sendRequest('POST', window.constants.signUp, usersData).then(response => {
-            return JSON.parse(response.data);
-        }).then(() => {
+        return sendRequest('POST', window.constants.signUp, usersData).then(() => {
             dispatch({
                 type: 'SIGN_UP_SUCCESS'
             });
@@ -44,9 +46,9 @@ let toggleLoading = function() {
 
 function sendRequest(method, url, data) {
     return new Promise((resolve, reject) => {
-        let xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open(method, url, true);
-        let token = sessionStorage.getItem(tokenKey);
+        const token = localStorage.getItem(TokenKey);
         if (token) {
             xhr.setRequestHeader('Authorization', `Bearer ${token}`);
         }
@@ -57,10 +59,11 @@ function sendRequest(method, url, data) {
                 return;
             }
 
+            const response = JSON.parse(xhr.response);
             if (xhr.status !== 200) {
-                reject(xhr.data);
+                reject(response);
             } else {
-                resolve(xhr.data);
+                resolve(response);
             }
         };
         xhr.send(JSON.stringify(data));
