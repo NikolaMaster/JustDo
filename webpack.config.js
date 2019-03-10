@@ -3,7 +3,7 @@
 var path = require('path');
 
 module.exports = {
-    entry: './wwwroot/app/app.jsx',
+    entry: './app/app.jsx',
     devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, './wwwroot/bundle'),

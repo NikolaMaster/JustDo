@@ -19,10 +19,20 @@ let signIn = function (credentials) {
     };
 };
 
-let signUp = function(credentials) {
-    return {
-        type: 'SIGN_UP',
-        credentials
+let signUp = function(usersData) {
+    return dispatch => {
+        return sendRequest('POST', window.constants.signUp, usersData).then(response => {
+            return JSON.parse(response.data);
+        }).then(() => {
+            dispatch({
+                type: 'SIGN_UP_SUCCESS'
+            });
+        }).catch(data => {
+            dispatch({
+                type: 'SIGN_UP_ERROR',
+                errors: data
+            });
+        });
     };
 };
 
@@ -34,9 +44,9 @@ let toggleLoading = function() {
 
 function sendRequest(method, url, data) {
     return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open(method, url, true);
-        const token = sessionStorage.getItem(tokenKey);
+        let token = sessionStorage.getItem(tokenKey);
         if (token) {
             xhr.setRequestHeader('Authorization', `Bearer ${token}`);
         }

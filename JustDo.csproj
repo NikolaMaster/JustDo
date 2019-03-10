@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="app\actions.jsx" />
+    <Content Include="app\app.jsx" />
+    <Content Include="app\appView.jsx" />
+    <Content Include="app\containers\notFound.jsx" />
+    <Content Include="app\containers\signIn.jsx" />
+    <Content Include="app\containers\signUp.jsx" />
+    <Content Include="app\containers\toDo.jsx" />
+    <Content Include="app\reducer.jsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
@@ -12,8 +23,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\" />
-    <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\bundle\" />
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>

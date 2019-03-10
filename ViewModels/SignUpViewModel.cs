@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JustDo.Models
+namespace JustDo.ViewModels
 {
-    public class SignUpModel : SignInModel
+    public class SignUpViewModel : SignInViewModel
     {
         [Required]
         [Compare("Password")]

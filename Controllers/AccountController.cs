@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using JustDo.Models;
-using Microsoft.AspNetCore.Http;
+using JustDo.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Task = System.Threading.Tasks.Task;
 
 namespace JustDo.Controllers
 {
@@ -21,18 +21,23 @@ namespace JustDo.Controllers
             _db = db;
         }
 
-        [HttpPost("/SignUp")]
-        public IActionResult SignUp(SignUpModel model)
+        [HttpPost("/signup")]
+        public IActionResult SignUp([FromBody] SignUpViewModel viewModel)
         {
+            if (_db.Users.Any(u => string.Equals(u.Login, viewModel.UserName)))
+            {
+                ModelState.AddModelError("username", "User with the same username is already exists");
+            }
+
             if (!ModelState.IsValid)
             {
-                return StatusCode(400);
+                return BadRequest(ModelState);
             }
 
             var user = new User
             {
-                Login = model.UserName,
-                Password = model.Password
+                Login = viewModel.UserName,
+                Password = EncryptPassword(viewModel.Password)
             };
 
             _db.Users.AddAsync(user);
@@ -41,19 +46,17 @@ namespace JustDo.Controllers
         }
 
         [HttpPost("/token")]
-        public async Task Token([FromBody] SignInModel user)
+        public IActionResult Token([FromBody] SignInViewModel user)
         {
             if (!ModelState.IsValid)
             {
-                Response.StatusCode = 400;
-                return;
+                return BadRequest(ModelState);
             }
 
             var identity = GetIdentity(user.UserName, user.Password);
             if (identity == null)
             {
-                Response.StatusCode = 400;
-                return;
+                return Unauthorized();
             }
 
             var now = DateTime.UtcNow;
@@ -62,22 +65,18 @@ namespace JustDo.Controllers
                 signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(),
                     SecurityAlgorithms.HmacSha256));
             var encodeJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-            var response = new
+            return Ok(new
             {
                 access_token = encodeJwt,
                 username = identity.Name
-            };
-
-            Response.ContentType = "application/json";
-            await Response.WriteAsync(JsonConvert.SerializeObject(response,
-                new JsonSerializerSettings {Formatting = Formatting.Indented}));
+            });
         }
 
         private ClaimsIdentity GetIdentity(string username, string password)
         {
             var user = _db.Users.FirstOrDefault(u =>
-                string.Equals(u.Login, username) && string.Equals(u.Password, password));
+                string.Equals(u.Login, username) &&
+                string.Equals(u.Password, EncryptPassword(password)));
 
             if (user == null)
             {
@@ -93,6 +92,11 @@ namespace JustDo.Controllers
                 ClaimsIdentity.DefaultRoleClaimType);
 
             return claimsIdentity;
+        }
+
+        private static string EncryptPassword(string password)
+        {
+            return Convert.ToBase64String(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(password)));
         }
     }
 }

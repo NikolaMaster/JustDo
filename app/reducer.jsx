@@ -6,10 +6,19 @@ export default function(state = Map(), action){
             state.set('isLoading', !state.isLoading);
             break;
         case 'SIGN_IN_SUCCESS':
-            state.set('username', action.username);
+            state.merge({
+                username: action.username,
+                'sign-in-errors': undefined
+            });
             break;
         case 'SIGN_IN_ERROR':
             state.set('sign-in-errors', action.errors);
+            break;
+        case 'SIGN_UP_SUCCESS':
+            state.delete('sign-up-errors');
+            break;
+        case 'SIGN_UP_ERROR':
+            state.set('sign-up-errors', action.errors);
             break;
     }
 
