@@ -3,7 +3,7 @@ import React from 'react';
 import {createStore, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducer.jsx';
-import AppView from './appView.jsx';
+import AppView from './containers/appView/appView.jsx';
 import thunk from 'redux-thunk';
 
 let store = createStore(reducer, applyMiddleware(thunk));

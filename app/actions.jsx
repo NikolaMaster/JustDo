@@ -3,6 +3,7 @@ export const TokenKey = 'TokenKey';
 
 let signIn = function (credentials) {
     return dispatch => {
+        dispatch(toggleLoading());
         return sendRequest('POST', window.constants.signIn, credentials).then(data => {
             localStorage.setItem(TokenKey, data.access_token);
             dispatch({
@@ -16,15 +17,18 @@ let signIn = function (credentials) {
             dispatch({
                 type: 'SIGN_IN_ERROR',
                 payload: {
-                    errors: data
+                    errors: data.data
                 }
             });
+        }).finally(() => {
+            dispatch(toggleLoading());
         });
     };
 };
 
 let signUp = function(usersData) {
     return dispatch => {
+        dispatch(toggleLoading());
         return sendRequest('POST', window.constants.signUp, usersData).then(() => {
             dispatch({
                 type: 'SIGN_UP_SUCCESS'
@@ -32,15 +36,49 @@ let signUp = function(usersData) {
         }).catch(data => {
             dispatch({
                 type: 'SIGN_UP_ERROR',
-                errors: data
+                errors: data.data
             });
+        }).finally(() => {
+            dispatch(toggleLoading());
         });
     };
 };
 
 let toggleLoading = function() {
     return {
-        type: 'TOGGLE_LOADING'
+        type: 'TOGGLE_LOADER'
+    };
+};
+
+let loadTasks = function() {
+    return dispatch => {
+        dispatch(toggleLoading());
+        return sendRequest('GET', window.constants.tasks).then(data => {
+            dispatch({
+                type: 'TASKS_LOADED',
+                payload: {
+                    tasks: data
+                }
+            });
+        }).catch((data) => {
+            dispatch({
+                type: 'TASKS_LOAD_ERROR',
+                payload: {
+                    errors: data.data
+                }
+            });
+
+            if (data.status === 401) {
+                localStorage.removeItem(TokenKey);
+                dispatch({
+                    type: 'DROP_AUTHORIZE'
+                });
+
+                history.push('/signin');
+            }
+        }).finally(() => {
+            dispatch(toggleLoading());
+        });
     };
 };
 
@@ -59,9 +97,12 @@ function sendRequest(method, url, data) {
                 return;
             }
 
-            const response = JSON.parse(xhr.response);
+            const response = xhr.response && xhr.response.length ? JSON.parse(xhr.response) : '';
             if (xhr.status !== 200) {
-                reject(response);
+                reject({
+                    data: response,
+                    status: xhr.status
+                });
             } else {
                 resolve(response);
             }
@@ -70,4 +111,4 @@ function sendRequest(method, url, data) {
     });
 }
 
-export default {signIn, signUp, toggleLoading};
+export default { signIn, signUp, toggleLoading, loadTasks};

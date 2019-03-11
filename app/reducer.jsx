@@ -18,7 +18,16 @@ export default function (state = Map({
         case 'SIGN_UP_SUCCESS':
             return state.delete('signUpErrors');
         case 'SIGN_UP_ERROR':
-            return state.update('signUpErrors', () => action.errors);
+            return state.set('signUpErrors', action.errors);
+        case 'TASKS_LOADED':
+            return state.merge({
+                tasks: action.payload.tasks,
+                taskLoadErrors: null
+            });
+        case 'TASKS_LOAD_ERROR':
+            return state.set('taskLoadErrors', action.payload.errors);
+        case 'DROP_AUTHORIZE':
+            return state.set('isAuthorized', false);
     }
 
     return state;

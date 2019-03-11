@@ -7,7 +7,7 @@
   <ItemGroup>
     <Content Include="app\actions.jsx" />
     <Content Include="app\app.jsx" />
-    <Content Include="app\appView.jsx" />
+    <Content Include="app\containers\appView\appView.jsx" />
     <Content Include="app\containers\notFound.jsx" />
     <Content Include="app\containers\signIn.jsx" />
     <Content Include="app\containers\signUp.jsx" />

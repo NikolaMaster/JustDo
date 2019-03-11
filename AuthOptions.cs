@@ -8,7 +8,7 @@ namespace JustDo
         public const string Issuer = "JustDoAppServer";
         public const string Audience = "JustDoAppClient";
         private const string Key = "mysupersecret_secretkey!123";
-        public const int LifeTime = 1;
+        public const int LifeTime = 60;
 
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {

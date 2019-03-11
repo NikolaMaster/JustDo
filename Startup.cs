@@ -54,11 +54,11 @@ namespace JustDo
             }
 
             app.UseHttpsRedirection();
-            app.UseFileServer();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc(routes =>
             {
+                routes.MapRoute("DefaultApi", "api/{controller}");
                 routes.MapSpaFallbackRoute("spa-fallback", new {controller = "Home", action = "Index"});
             });
         }

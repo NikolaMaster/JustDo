@@ -1,15 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import SignInContainer from './containers/signIn.jsx';
-import SignUpContainer from './containers/signUp.jsx';
-import NotFoundContainer from './containers/notFound.jsx';
-import ToDoContainer from './containers/toDo.jsx';
-import Grid from '@material-ui/core/Grid';
-import history from './history.js';
+import SignInContainer from '../signIn.jsx';
+import SignUpContainer from '../signUp.jsx';
+import NotFoundContainer from '../notFound.jsx';
+import ToDoContainer from '../toDo.jsx';
+import { Grid, CircularProgress } from '@material-ui/core';
+import history from '../../history.js';
+import { connect } from 'react-redux';
 
 import './appView.css';
 
-export default class AppView extends React.Component {
+class AppView extends React.Component {
+
     render() {
         return (
             <Grid container className="main-container" alignItems="stretch">
@@ -23,7 +25,16 @@ export default class AppView extends React.Component {
                             <Route component={NotFoundContainer} />
                         </Switch>
                     </Router>
+                    {this.props.isLoading ? <CircularProgress /> : null}
                 </Grid>
             </Grid>);
     }
 }
+
+let mapStateToProps = (state) => {
+    return {
+        isLoading: state.get('isLoading')
+    };
+};
+
+export default connect(mapStateToProps)(AppView);

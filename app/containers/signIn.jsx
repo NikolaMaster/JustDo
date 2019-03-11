@@ -1,7 +1,7 @@
 import React from 'react';
 import actions from '../actions.jsx';
 import { connect } from 'react-redux';
-import { Fab, Grid, TextField, FormGroup } from '@material-ui/core';
+import { Fab, Grid, TextField, FormGroup, Typography } from '@material-ui/core';
 
 class SignInContainer extends React.Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class SignInContainer extends React.Component {
         return (
             <Grid container direction="row" alignItems="center" justify="center">
                 <Grid item>
-                    <h1>Sign In</h1>
+                    <Typography variant="h3" align="center">Sign In</Typography>
                     <FormGroup>
                         <TextField error={this.getUserNameError()} placeholder="E-mail" onChange={this.onUsernameChange} margin="dense"/>
                         <TextField error={this.getPasswordError()} type="password" placeholder="Password" onChange={this.onPasswordChange} margin="normal" />                        
